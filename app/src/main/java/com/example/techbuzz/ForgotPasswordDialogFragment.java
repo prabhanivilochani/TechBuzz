@@ -4,17 +4,18 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class ForgotPasswordDialogFragment extends DialogFragment {
@@ -28,55 +29,42 @@ public class ForgotPasswordDialogFragment extends DialogFragment {
 
         TextInputEditText emailInput = view.findViewById(R.id.emailField);
         MaterialButton sendBtn = view.findViewById(R.id.sendButton);
+        Chip successChip = view.findViewById(R.id.successChip);
 
         sendBtn.setOnClickListener(v -> {
             String email = emailInput.getText().toString().trim();
-            if (!email.isEmpty()) {
-                // Perform your forgot password logic here
-                // For example, Firebase password reset:
-                // FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-                //     .addOnCompleteListener(task -> {
-                //         if (task.isSuccessful()) {
-                //             showSuccessMessage();
-                //             dismiss();
-                //         } else {
-                //             showErrorMessage();
-                //         }
-                //     });
 
-                // For now, just show success message
-                showSuccessMessage();
-                dismiss();
-            } else {
+            if (email.isEmpty()) {
                 emailInput.setError("Email required");
+                return;
             }
+
+            // Validate email format
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailInput.setError("Enter valid email");
+                return;
+            }
+
+            // Show loading state
+            sendBtn.setEnabled(false);
+            sendBtn.setText("Sending...");
+
+            // Simulate network request
+            new Handler().postDelayed(() -> {
+                // On success
+                successChip.setVisibility(View.VISIBLE);
+                successChip.setChipIconResource(R.drawable.ic_check_circle);
+                successChip.setText("Reset email sent to " + email);
+
+                // Auto-dismiss after 2 seconds
+                new Handler().postDelayed(() -> {
+                    dismiss();
+                }, 2000);
+
+            }, 1500); // Simulate network delay
         });
 
         return view;
-    }
-
-    private void showSuccessMessage() {
-        // Option 1: Using Snackbar (recommended)
-        if (getActivity() != null) {
-            View rootView = getActivity().findViewById(android.R.id.content);
-            Snackbar.make(rootView, "Password reset email sent successfully!", Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(getResources().getColor(R.color.success_green))
-                    .setTextColor(Color.WHITE)
-                    .show();
-        }
-
-        // Option 2: Using Toast (simpler)
-        // Toast.makeText(getContext(), "Password reset email sent successfully!", Toast.LENGTH_LONG).show();
-    }
-
-    private void showErrorMessage() {
-        if (getActivity() != null) {
-            View rootView = getActivity().findViewById(android.R.id.content);
-            Snackbar.make(rootView, "Failed to send reset email. Please try again.", Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(getResources().getColor(R.color.error_red))
-                    .setTextColor(Color.WHITE)
-                    .show();
-        }
     }
 
     @Override
@@ -84,7 +72,11 @@ public class ForgotPasswordDialogFragment extends DialogFragment {
         super.onStart();
         Dialog dialog = getDialog();
         if (dialog != null && dialog.getWindow() != null) {
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            // Make dialog wrap content properly
+            dialog.getWindow().setLayout(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
     }

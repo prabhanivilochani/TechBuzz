@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_dev_info"
+        android:icon="@drawable/dev_info_icon"
+        android:title="Dev Info"
+        app:showAsAction="always" />
+</menu>

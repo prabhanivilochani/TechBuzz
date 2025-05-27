@@ -10,12 +10,17 @@
         android:label="TechBuzz"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TechBuzz">
+        android:theme="@style/Theme.TechBuzz"
+        >
 
         <activity android:name=".SignInActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SignUpActivity" />
 
+        <activity
+            android:name=".SportsNewsActivity"
+            android:label="Sports News"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".SplashActivity"
             android:exported="true"

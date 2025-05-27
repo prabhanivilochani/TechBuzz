@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_dev_info"
+        android:icon="@drawable/ic_dev_info"
+        android:title="Dev Info."
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_user_info"
+        android:icon="@drawable/ic_user_profile"
+        android:title="User Info."
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Log Out"
+        app:showAsAction="never" />
+</menu>
