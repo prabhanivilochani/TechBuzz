@@ -1,5 +1,6 @@
 package com.example.techbuzz;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SportsNewsActivity extends AppCompatActivity {
 
@@ -43,15 +46,26 @@ public class SportsNewsActivity extends AppCompatActivity {
 
             popup.setOnMenuItemClickListener(item -> {
                 int id = item.getItemId();
-                if (id == R.id.menu_dev_info) {
-                    Toast.makeText(this, "Developer Info Selected (Popup)", Toast.LENGTH_SHORT).show();
+                if  (id == R.id.menu_dev_info) {
+                    startActivity(new Intent(this, DeveloperInfoActivity.class));
                     return true;
+
                 } else if (id == R.id.menu_user_info) {
-                    Toast.makeText(this, "User Info Selected", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, UserInfoActivity.class));
                     return true;
                 } else if (id == R.id.menu_logout) {
-                    Toast.makeText(this, "Logout Selected", Toast.LENGTH_SHORT).show();
+                    FirebaseAuth.getInstance().signOut(); // Log out from Firebase
+
+                    Toast.makeText(this, "Logout successful", Toast.LENGTH_SHORT).show(); // Success message
+
+                    // Navigate to SignInActivity and clear back stack
+                    Intent intent = new Intent(SportsNewsActivity.this, SignInActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
                     return true;
+
+
                 }
                 return false;
             });
