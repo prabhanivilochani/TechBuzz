@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "623773445594",
+    "project_id": "myapp-auth-176a0",
+    "storage_bucket": "myapp-auth-176a0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623773445594:android:e61bc3486ab891b39924e3",
+        "android_client_info": {
+          "package_name": "com.example.techbuzz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgcNXjnrptJ0k_jX1dXmYlYsz4rZRIKNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
