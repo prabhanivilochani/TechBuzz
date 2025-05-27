@@ -54,7 +54,7 @@ public class SignInActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             Toast.makeText(SignInActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                            startActivity(new Intent(SignInActivity.this, SportsNewsActivity.class));
                             finish();
                         } else {
                             Toast.makeText(SignInActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -88,10 +88,11 @@ public class SignInActivity extends AppCompatActivity {
             passwordInput.setError("Password is required");
             return false;
         }
-        if (password.length() < 6) {
+        if (password.length() < 8) {
             passwordInput.setError("Enter valid password");
             return false;
         }
+
         return true;
     }
 }

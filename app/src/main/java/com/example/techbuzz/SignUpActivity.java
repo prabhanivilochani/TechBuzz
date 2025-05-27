@@ -129,7 +129,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> {
                     progressDialog.dismiss();
                     sendVerificationEmail(user);
-                    startActivity(new Intent(this, MainActivity.class));
+                    startActivity(new Intent(this, SportsNewsActivity.class));
                     finish();
                 })
                 .addOnFailureListener(e -> {
