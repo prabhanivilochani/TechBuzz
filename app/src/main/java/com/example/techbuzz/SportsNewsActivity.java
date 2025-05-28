@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -46,7 +46,7 @@ public class SportsNewsActivity extends AppCompatActivity {
 
             popup.setOnMenuItemClickListener(item -> {
                 int id = item.getItemId();
-                if  (id == R.id.menu_dev_info) {
+                if (id == R.id.menu_dev_info) {
                     startActivity(new Intent(this, DeveloperInfoActivity.class));
                     return true;
 
@@ -64,8 +64,6 @@ public class SportsNewsActivity extends AppCompatActivity {
                     startActivity(intent);
 
                     return true;
-
-
                 }
                 return false;
             });
@@ -91,7 +89,8 @@ public class SportsNewsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_dev_info) {
-            Toast.makeText(this, "Developer Info Selected (App Bar Icon)", Toast.LENGTH_SHORT).show();
+            // Navigate to DeveloperInfoActivity
+            startActivity(new Intent(this, DeveloperInfoActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
