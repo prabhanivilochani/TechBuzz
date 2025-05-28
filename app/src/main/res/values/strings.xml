@@ -1,6 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TechBuzz</string>
     <string name="user_avatar">User Avatar</string>
+    <string name="sports_image_desc_1">Football Final Match Image</string>
+    <string name="sports_image_desc_2">Sports Event Image</string>
+
 
 
 </resources>

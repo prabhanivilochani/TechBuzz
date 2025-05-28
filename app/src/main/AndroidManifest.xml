@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.techbuzz">
 
-    <!-- Permissions go here -->
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -11,17 +11,10 @@
         android:label="TechBuzz"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TechBuzz"
-        >
+        android:theme="@style/Theme.TechBuzz">
 
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SignUpActivity" />
 
-        <activity
-            android:name=".SportsNewsActivity"
-            android:label="Sports News"
-            android:parentActivityName=".MainActivity"/>
+        <!-- Splash Activity -->
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -31,13 +24,26 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DeveloperInfoActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Material3.Dark.NoActionBar" />
-        <activity android:name=".UserInfoActivity" />
-        <activity android:name=".EditUserActivity" />
 
+        <!-- Auth Activities -->
+        <activity android:name=".SignInActivity" android:exported="false"/>
+        <activity android:name=".SignUpActivity" android:exported="false"/>
+
+        <!-- Main and News Activities -->
+        <activity android:name=".MainActivity" android:exported="false"/>
+        <activity android:name=".AcademicNewsActivity" android:exported="false"/>
+        <activity android:name=".EventsNewsActivity" android:exported="false"/>
+        <activity
+            android:name=".SportsNewsActivity"
+            android:theme="@style/Theme.TechBuzz"
+            android:label="Sports News"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+
+        <!-- Info Activities -->
+        <activity android:name=".DeveloperInfoActivity" android:exported="false" />
+        <activity android:name=".UserInfoActivity" android:exported="false" />
+        <activity android:name=".EditUserActivity" android:exported="false" />
 
     </application>
 </manifest>

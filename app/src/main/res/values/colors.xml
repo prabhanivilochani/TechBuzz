@@ -17,6 +17,13 @@
     <color name="selected_nav_icon">#166C94</color> <!-- or your active tab color -->
     <color name="unselected_nav_icon">#535050</color> <!-- or a subtle gray -->
     <color name="surface">#FFFFFF</color> <!-- or any appropriate background color -->
+    <color name="md_theme_surface">#FFFFFF</color> <!-- or any background color -->
 
+
+
+    <color name="md_theme_surface_bright">#F1F1F1</color>
+    <color name="md_theme_surface_container">#EEEEEE</color>
+    <color name="md_theme_on_surface">#000000</color>
+    <color name="md_theme_on_surface_variant">#666666</color>
 
 </resources>
