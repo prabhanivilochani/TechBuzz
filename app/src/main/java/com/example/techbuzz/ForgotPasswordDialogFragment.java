@@ -17,6 +17,7 @@ import androidx.fragment.app.DialogFragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordDialogFragment extends DialogFragment {
 
@@ -39,30 +40,30 @@ public class ForgotPasswordDialogFragment extends DialogFragment {
                 return;
             }
 
-            // Validate email format
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 emailInput.setError("Enter valid email");
                 return;
             }
 
-            // Show loading state
             sendBtn.setEnabled(false);
             sendBtn.setText("Sending...");
 
-            // Simulate network request
-            new Handler().postDelayed(() -> {
-                // On success
-                successChip.setVisibility(View.VISIBLE);
-                successChip.setChipIconResource(R.drawable.ic_check_circle);
-                successChip.setText("Reset email sent to " + email);
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            successChip.setVisibility(View.VISIBLE);
 
-                // Auto-dismiss after 2 seconds
-                new Handler().postDelayed(() -> {
-                    dismiss();
-                }, 2000);
+                            successChip.setText("Reset email sent to " + email);
 
-            }, 1500); // Simulate network delay
+                            new Handler().postDelayed(this::dismiss, 2000);
+                        } else {
+                            sendBtn.setEnabled(true);
+                            sendBtn.setText("Send Link");
+                            emailInput.setError("Failed to send reset email. Try again.");
+                        }
+                    });
         });
+
 
         return view;
     }

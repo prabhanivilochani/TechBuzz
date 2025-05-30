@@ -64,8 +64,11 @@ public class SignInActivity extends AppCompatActivity {
 
         // Sign Up navigation
         signUpText.setOnClickListener(v -> {
-            Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+
             startActivity(intent);
+            finish(); // optional but recommended
+
         });
 
         // Forgot Password Dialog
