@@ -1,11 +1,19 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <style name="Theme.TechBuzz" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Same as base theme -->
         <item name="colorPrimary">@color/primary_blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSurface">@color/md_theme_surface</item>
         <item name="colorOnSurface">@color/md_theme_on_surface</item>
 
-        <!-- 👇 Prevent Android's default splash and preview window -->
+
+        <item name="android:windowSplashScreenAnimatedIcon">@null</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@null</item>
+        <item name="android:windowSplashScreenBrandingImage">@null</item>
+        <item name="android:windowSplashScreenBackground">@null</item>
+
+
+
         <item name="android:windowDisablePreview">true</item>
     </style>
 </resources>
