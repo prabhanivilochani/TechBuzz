@@ -18,12 +18,14 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.TechBuzz.Splash">
+            android:theme="@style/Theme.TechBuzz">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
 
         <!-- Auth Activities -->
         <activity android:name=".SignInActivity" android:exported="false"/>
@@ -44,6 +46,6 @@
         <activity android:name=".DeveloperInfoActivity" android:exported="false" />
         <activity android:name=".UserInfoActivity" android:exported="false" />
         <activity android:name=".EditUserActivity" android:exported="false" />
-
+        <activity android:name=".ManageNewsActivity" />
     </application>
 </manifest>

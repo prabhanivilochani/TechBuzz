@@ -64,10 +64,10 @@ public class SignInActivity extends AppCompatActivity {
 
         // Sign Up navigation
         signUpText.setOnClickListener(v -> {
-            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+            Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
 
             startActivity(intent);
-            finish(); // optional but recommended
+            finish();
 
         });
 

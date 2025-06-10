@@ -12,6 +12,6 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase
         FirebaseApp.initializeApp(this);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
     }
 }
