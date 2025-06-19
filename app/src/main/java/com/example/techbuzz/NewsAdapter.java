@@ -1,11 +1,10 @@
 package com.example.techbuzz;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,11 +23,11 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
-    private Activity activity;
+    private Context context;
     private List<NewsItem> newsList;
 
-    public NewsAdapter(Activity activity, List<NewsItem> newsList) {
-        this.activity = activity;
+    public NewsAdapter(Context context, List<NewsItem> newsList) {
+        this.context = context;
         this.newsList = newsList;
     }
 
@@ -39,25 +39,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.item_news_card, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_news_card, parent, false);
         return new NewsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        NewsItem newsItem = newsList.get(position);
+        NewsItem item = newsList.get(position);
 
-        holder.newsTitle.setText(newsItem.getTitle());
-        holder.newsDescription.setText(newsItem.getDescription());
-        holder.newsDate.setText("Created: " + newsItem.getCreatedDate());
+        holder.newsTitle.setText(item.getTitle());
+        holder.newsDescription.setText(item.getDescription());
+        holder.newsDate.setText("Created: " + item.getCreatedDate());
 
-        if (newsItem.getImageBase64() != null && !newsItem.getImageBase64().isEmpty()) {
+        if (item.getImageBase64() != null && !item.getImageBase64().isEmpty()) {
             try {
-                byte[] imageBytes = Base64.decode(newsItem.getImageBase64(), Base64.DEFAULT);
+                byte[] imageBytes = Base64.decode(item.getImageBase64(), Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
                 holder.newsImage.setImageBitmap(bitmap);
             } catch (Exception e) {
-                e.printStackTrace();
                 holder.newsImage.setImageResource(R.drawable.placeholder);
             }
         } else {
@@ -65,47 +64,28 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         }
 
         holder.buttonEdit.setOnClickListener(v -> {
-            int pos = holder.getAdapterPosition();
-            if (pos != RecyclerView.NO_POSITION && pos < newsList.size()) {
-                NewsItem itemToEdit = newsList.get(pos);
-                if (itemToEdit.getId() == null || itemToEdit.getId().isEmpty()) {
-                    Toast.makeText(activity, "Invalid news ID for edit", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                Intent intent = new Intent(activity, ManageNewsActivity.class);
-                intent.putExtra("newsId", itemToEdit.getId());
-
-                activity.startActivity(intent);
-            }
+            Intent intent = new Intent(context, ManageNewsActivity.class);
+            intent.putExtra("newsId", item.getId());
+            intent.putExtra("title", item.getTitle());
+            intent.putExtra("description", item.getDescription());
+            intent.putExtra("category", item.getCategory());
+            intent.putExtra("imageBase64", item.getImageBase64());
+            context.startActivity(intent);
         });
 
         holder.buttonDelete.setOnClickListener(v -> {
-            int pos = holder.getAdapterPosition();
-            if (pos == RecyclerView.NO_POSITION || pos >= newsList.size()) {
-                Toast.makeText(activity, "Delete failed: Invalid position", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            NewsItem itemToDelete = newsList.get(pos);
-            if (itemToDelete.getId() == null || itemToDelete.getId().isEmpty()) {
-                Toast.makeText(activity, "Delete failed: Missing document ID", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            FirebaseFirestore.getInstance()
-                    .collection("news")
-                    .document(itemToDelete.getId())
+            String documentId = item.getId();
+            FirebaseFirestore.getInstance().collection("news")
+                    .document(documentId)
                     .delete()
                     .addOnSuccessListener(aVoid -> {
-                        newsList.remove(pos);
-                        notifyItemRemoved(pos);
-                        Toast.makeText(activity, "News deleted", Toast.LENGTH_SHORT).show();
+                        newsList.remove(position);
+                        notifyItemRemoved(position);
+                        Toast.makeText(context, "News deleted", Toast.LENGTH_SHORT).show();
                     })
-                    .addOnFailureListener(e -> {
-                        Log.e("NewsAdapter", "Delete failed", e);
-                        Toast.makeText(activity, "Delete error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    });
+                    .addOnFailureListener(e ->
+                            Toast.makeText(context, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                    );
         });
     }
 
@@ -118,9 +98,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         ImageView newsImage;
         TextView newsTitle, newsDescription, newsDate;
         ImageButton buttonEdit, buttonDelete;
+        CardView newsCard;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
+            newsCard = itemView.findViewById(R.id.newsCard);
             newsImage = itemView.findViewById(R.id.newsImage);
             newsTitle = itemView.findViewById(R.id.newsTitle);
             newsDescription = itemView.findViewById(R.id.newsDescription);

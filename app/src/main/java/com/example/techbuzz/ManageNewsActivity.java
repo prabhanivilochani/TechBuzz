@@ -21,7 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ManageNewsActivity extends AppCompatActivity {
@@ -120,13 +123,16 @@ public class ManageNewsActivity extends AppCompatActivity {
         String userId = mAuth.getCurrentUser().getUid();
         String newsId = db.collection("news").document().getId();
 
+        // ✅ Format current date
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
         Map<String, Object> newsData = new HashMap<>();
         newsData.put("userId", userId);
         newsData.put("title", title);
         newsData.put("description", description);
         newsData.put("imageBase64", encodedImage);
         newsData.put("category", category);
-        newsData.put("timestamp", System.currentTimeMillis());
+        newsData.put("createdDate", currentDate);  // ✅ Added formatted date string
 
         db.collection("news").document(newsId).set(newsData)
                 .addOnSuccessListener(unused -> {
