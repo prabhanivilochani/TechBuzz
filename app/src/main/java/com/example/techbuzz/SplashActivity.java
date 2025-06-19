@@ -15,6 +15,6 @@ public class SplashActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             startActivity(new Intent(SplashActivity.this, SignInActivity.class));
             finish();
-        }, 1000); // delay
+        }, 1000); // Delay: 1 second
     }
 }
