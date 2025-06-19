@@ -66,6 +66,8 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
+    implementation ("com.google.firebase:firebase-storage:20.3.0")
+
     // Lifecycle (optional but good for modern apps)
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 

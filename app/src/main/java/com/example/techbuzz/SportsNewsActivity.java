@@ -106,15 +106,18 @@ public class SportsNewsActivity extends AppCompatActivity {
                     sportsNewsList.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         NewsItem item = doc.toObject(NewsItem.class);
-                        sportsNewsList.add(item);
+                        if (item != null) {
+                            item.setId(doc.getId()); // ✅ THIS FIX IS CRUCIAL
+                            sportsNewsList.add(item);
+                        }
                     }
                     adapter = new NewsAdapter(SportsNewsActivity.this, sportsNewsList);
                     recyclerViewSports.setAdapter(adapter);
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to load news: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
 
     private void logoutUser() {
         Intent intent = new Intent(SportsNewsActivity.this, SignInActivity.class);
