@@ -107,7 +107,7 @@ public class SportsNewsActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         NewsItem item = doc.toObject(NewsItem.class);
                         if (item != null) {
-                            item.setId(doc.getId()); // ✅ THIS FIX IS CRUCIAL
+                            item.setId(doc.getId()); 
                             sportsNewsList.add(item);
                         }
                     }
