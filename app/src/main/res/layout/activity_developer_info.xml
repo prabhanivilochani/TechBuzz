@@ -40,16 +40,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/avatarImage" />
+    <TextView
+        android:id="@+id/devID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="2020T00916"
+        android:textColor="#B3FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/devNameText" />
 
     <TextView
         android:id="@+id/devRoleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
         android:text="Android Developer"
         android:textColor="#B3FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/devNameText" />
 
@@ -58,14 +70,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="32dp"
+        android:lineSpacingExtra="4dp"
         android:text="Passionate about creating intuitive mobile experiences that make technology accessible to everyone. Committed to clean code, thoughtful design, and continuous learning in the ever-evolving Android ecosystem."
+        android:textAlignment="center"
         android:textColor="#DDFFFFFF"
         android:textSize="14sp"
-        android:lineSpacingExtra="4dp"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/devRoleText" />
 
@@ -73,7 +86,7 @@
         android:id="@+id/versionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:text="App Version: 1.0"
         android:textColor="#B3FFFFFF"
         android:textSize="12sp"
@@ -86,7 +99,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@android:color/white"
         android:text="Contact Developer"
@@ -95,6 +108,7 @@
         app:icon="@drawable/ic_email"
         app:iconTint="#535050"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/versionText" />
 
