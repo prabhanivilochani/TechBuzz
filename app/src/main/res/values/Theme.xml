@@ -5,7 +5,6 @@
         <item name="colorSurface">@color/md_theme_surface</item>
         <item name="colorOnSurface">@color/md_theme_on_surface</item>
 
-        <!-- 👇 Prevent Android's default splash and preview window -->
         <item name="android:windowDisablePreview">true</item>
     </style>
 </resources>
