@@ -13,11 +13,11 @@
         <color name="md_theme_light_primary">#166C94</color>
         <color name="md_theme_light_secondaryContainer">#D0EFFF</color>
         <color name="md_theme_light_surfaceContainer">#F7F7F7</color>
-    <color name="surfaceContainer">#F5F5F5</color> <!-- light gray -->
-    <color name="selected_nav_icon">#166C94</color> <!-- or your active tab color -->
-    <color name="unselected_nav_icon">#535050</color> <!-- or a subtle gray -->
-    <color name="surface">#FFFFFF</color> <!-- or any appropriate background color -->
-    <color name="md_theme_surface">#FFFFFF</color> <!-- or any background color -->
+    <color name="surfaceContainer">#F5F5F5</color> 
+    <color name="selected_nav_icon">#166C94</color> 
+    <color name="unselected_nav_icon">#535050</color> 
+    <color name="surface">#FFFFFF</color> 
+    <color name="md_theme_surface">#FFFFFF</color>
 
 
 
